@@ -39,7 +39,7 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Groups
 - [x] Group Invitations
 - [x] Group Memberships
-- [ ] Group Details
+- [x] Group Details
 - [x] Add Expense Modal
 - [ ] Settle Up Modal
 - [ ] Recent Activity
