@@ -11,13 +11,11 @@ updates:
       interval: "monthly"
   - package-ecosystem: "npm"
     directory: "/kafka-backend"
-    update_schedule: "monthly"
+    schedule: 
+      interval: "monthly"
     ignored_updates:
       - match:
           dependency_name: "kafka-node"
-          # The version_requirement specifies the versions to ignore.
-          # The range format is specific to the package manager
-          # (e.g., ^1.0.0 for JS, or ~> 2.0 for Ruby).
           version_requirement: "^2.5.0"
   - package-ecosystem: "npm"
     directory: "/frontend"
