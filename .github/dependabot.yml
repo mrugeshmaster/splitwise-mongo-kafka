@@ -13,10 +13,8 @@ updates:
     directory: "/kafka-backend"
     schedule: 
       interval: "monthly"
-    ignored_updates:
-      - match:
-          dependency_name: "kafka-node"
-          version_requirement: "^2.5.0"
+    ignore:
+      - dependency-name: "kafka-node"
   - package-ecosystem: "npm"
     directory: "/frontend"
     schedule:
