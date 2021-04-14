@@ -1,51 +1,36 @@
-const User = require('../../db/models/UserModel');
 const Group = require('../../db/models/GroupModel');
 const Bill = require('../../db/models/BillModel');
 
 const addExpenseHandler = (msg, callback) => {
-  console.log('Inside add expense');
-  console.log(msg);
   const res = {};
-  User.findById(msg.userId)
-    .then((user) => {
-      Group.findOne({ groupName: msg.groupName })
-        .then((group) => {
-          console.log(group.members);
-          Bill.create({
-            description: msg.description,
-            billAmount: msg.billAmount,
-            paidBy: user._id,
-            group: group._id,
-            participants: {
-              users: group.members,
-              splitAmount: msg.billAmount / group.members.length,
-            },
-          }, async (err, bill) => {
-            if (bill) {
-              console.log(bill);
-              await group.bills.push(bill._id);
-              await group.save();
-              res.status = 200;
-              res.data = 'BILL_CREATED';
-              callback(null, res);
-            } else {
-              console.log(err);
-              res.status = 201;
-              res.data = err;
-              callback(null, res);
-            }
-          });
-        }).catch((e) => {
-          console.log(e);
-          res.status = 500;
-          res.data = e;
+  Group.findOne({ groupName: msg.groupName })
+    .then(async (group) => {
+      const userObj = group.members.map((member) => ({
+        user: member,
+        settled: false,
+        collectOrPay: JSON.stringify(msg.userId) === JSON.stringify(member) ? 'COLLECT' : 'PAY',
+      }));
+      await Bill.create({
+        description: msg.description,
+        billAmount: msg.billAmount,
+        groupName: group.groupName,
+        paidby: msg.userId,
+        splitAmount: msg.billAmount / group.members.length,
+        users: userObj,
+      }, (err, result) => {
+        if (err) {
+          res.status = 400;
+          res.data = err;
           callback(null, res);
-        });
-    })
-    .catch((e) => {
-      console.log(e);
-      res.status = 500;
-      res.data = e;
+        } else if (result) {
+          res.status = 200;
+          res.data = 'BILL_CREATED';
+          callback(null, res);
+        }
+      });
+    }).catch((err) => {
+      res.status = 400;
+      res.data = err;
       callback(null, res);
     });
 };

@@ -21,7 +21,7 @@ function handleTopicRequest(topicName, fname) {
     const data = JSON.parse(message.value);
 
     fname.handleRequest(data.data, (err, res) => {
-      console.log(`after handle ${JSON.stringify(res)}`);
+      // console.log(`after handle ${JSON.stringify(res)}`);
       const payloads = [
         {
           topic: data.replyTo,

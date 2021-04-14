@@ -8,7 +8,6 @@ const acceptInviteHandler = async (msg, callback) => {
     { groupName: msg.groupName },
     { $push: { members: msg.userId } },
   ).then(async (group) => {
-    console.log(group);
     await User.findByIdAndUpdate(msg.userId,
       {
         $pull: { invitations: group._id },
@@ -22,13 +21,13 @@ const acceptInviteHandler = async (msg, callback) => {
         }
       })
       .catch((e) => {
-        console.log(e);
         res.status = 400;
+        res.data = e;
         callback(null, res);
       });
   }).catch((e) => {
-    console.log(e);
     res.status = 400;
+    res.data = e;
     callback(null, res);
   });
 };

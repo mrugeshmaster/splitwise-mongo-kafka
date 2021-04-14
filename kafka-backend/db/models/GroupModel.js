@@ -15,10 +15,6 @@ const groupsSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
   }],
-  bills: [{
-    type: Schema.Types.ObjectId,
-    ref: 'bill',
-  }],
 },
 {
   versionKey: false,

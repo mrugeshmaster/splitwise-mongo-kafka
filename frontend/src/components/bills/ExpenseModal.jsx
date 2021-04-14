@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import {
   Modal, Button, Form, Row, Col,
 } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  useDispatch,
+} from 'react-redux';
 import addExpenseAction from '../../actions/bills/addExpenseAction';
 
 export default function ExpenseModal(props) {
@@ -10,7 +12,6 @@ export default function ExpenseModal(props) {
     description: '',
     billAmount: '',
   });
-  const expenseMessage = useSelector((state) => state.addExpenseReducer.message);
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -25,11 +26,8 @@ export default function ExpenseModal(props) {
       billAmount: inputs.billAmount,
     };
     dispatch(addExpenseAction(data));
-  };
-
-  if (expenseMessage === 'BILL_CREATED') {
     props.handleClose();
-  }
+  };
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
 import {
   Row, Col, Button, ListGroup,
@@ -7,6 +8,8 @@ import { useParams } from 'react-router';
 import NavBar from '../landing/NavBar';
 import LeftSidebar from '../landing/LeftSideBar';
 import ExpenseModal from '../bills/ExpenseModal';
+import GroupDetailsCell from './GroupDetailsCell';
+import GroupDetailsSideBar from './GroupBalancesSideBar';
 import getGroupDetails from '../../actions/groups/groupDetailsActions';
 
 export default function GroupDetails() {
@@ -14,10 +17,25 @@ export default function GroupDetails() {
   const groupDetails = useSelector((state) => state.getGroupDetailsReducer.groupDetails);
   const params = useParams();
   const dispatch = useDispatch();
-  console.log(groupDetails);
+
   useEffect(() => {
     dispatch(getGroupDetails(params.groupName));
   }, [dispatch, params.groupName]);
+
+  const groupElements = [];
+  if (groupDetails.bills && groupDetails.bills.length > 0) {
+    groupDetails.bills.map((bill) => {
+      const groupElement = (
+        <ListGroup.Item key={bill.description}>
+          <GroupDetailsCell
+            key={bill.description}
+            bill={bill}
+          />
+        </ListGroup.Item>
+      );
+      groupElements.push(groupElement);
+    });
+  }
 
   return (
     <div>
@@ -45,17 +63,18 @@ export default function GroupDetails() {
             &nbsp;
             <Row>
               <ListGroup variant="flush" style={{ width: '100%' }}>
-                {/* {groupElements} */}
+                {groupElements}
               </ListGroup>
             </Row>
           </Col>
           <Col md={{ span: 2 }}>
-            {/* <RightSidebar
-              key={this.state.group_name}
-              groupName={this.state.group_name}
-              updateChild={this.state.updateChild}
-              onUpdateChild={this.onUpdateChild}
-            /> */}
+            <GroupDetailsSideBar
+              key={params.groupName}
+              bills={groupDetails.bills}
+              // groupName={this.state.group_name}
+              // updateChild={this.state.updateChild}
+              // onUpdateChild={this.onUpdateChild}
+            />
           </Col>
         </Row>
       </div>

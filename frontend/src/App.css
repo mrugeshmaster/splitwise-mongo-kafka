@@ -45,3 +45,21 @@
   width: 100vw;
   height: 100vh;
 }
+
+.billdate {
+  color: gray;
+}
+
+.owe {
+  color: salmon;
+}
+
+.paid {
+  color: darkcyan;
+}
+
+.balanceItem {
+  /* min-width: 100%; */
+  justify-content: center;
+  align-items: center;
+}

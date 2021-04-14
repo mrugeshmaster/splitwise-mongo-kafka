@@ -13,7 +13,6 @@ router.post('/', async (req, res) => {
   req.body.path = 'user-login';
   kafka.makeRequest('account', req.body, (err, results) => {
     if (err) {
-      // console.log('Inside err');
       res.json({
         status: 'error',
         msg: err,
@@ -29,8 +28,6 @@ router.post('/', async (req, res) => {
       });
       res.end(JSON.stringify({ message: 'INCORRECT_PASSWORD' }));
     } else {
-      // const data = JSON.parse(results.data);
-      // console.log(`Id: ${data._id}`);
       const token = jwt.sign({
         id: results.data._id,
       },
@@ -53,16 +50,6 @@ router.post('/', async (req, res) => {
         message: 'USER_LOGGED_IN',
         idToken: jwtToken,
       }));
-      // res.status(200).send({
-      //   name: data.name,
-      //   email: data.email,
-      //   phone: data.phone,
-      //   language: data.language,
-      //   currency: data.currency,
-      //   timezone: data.timezone,
-      //   image: data.image,
-      //   idToken: jwtToken,
-      // });
     }
   });
 });

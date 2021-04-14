@@ -4,7 +4,7 @@ const initState = {
   groupDetails: {},
 };
 
-const getAllUsersReducer = (state = initState, action) => {
+const getGroupDetailsReducer = (state = initState, action) => {
   switch (action.type) {
     case GET_GROUP_DETAILS:
       return {
@@ -16,4 +16,4 @@ const getAllUsersReducer = (state = initState, action) => {
   }
 };
 
-export default getAllUsersReducer;
+export default getGroupDetailsReducer;

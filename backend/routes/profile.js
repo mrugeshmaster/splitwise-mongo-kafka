@@ -6,18 +6,14 @@ const kafka = require('../kafka/client');
 const router = express.Router();
 
 router.get('/', checkAuth, (req, res) => {
-  // console.log('Inside Profile Get Request');
-  // console.log(req);
   const token = req.headers.authorization;
   const decoded = jwtDecode(token);
-  // console.log(decoded._id);
 
   req.body.path = 'user-get-profile';
   req.body.userId = decoded.id;
 
   kafka.makeRequest('users', req.body, (err, results) => {
     if (err) {
-      // console.log('Inside err');
       res.writeHead(500, {
         'Content-Type': 'application/json',
       });
@@ -46,13 +42,10 @@ router.get('/', checkAuth, (req, res) => {
 });
 
 router.put('/', checkAuth, (req, res) => {
-  // console.log('Inside Profile Put Request');
-  // console.log(req.body);
   req.body.path = 'user-update-profile';
 
   kafka.makeRequest('users', req.body, (err, results) => {
     if (err) {
-      // console.log('Inside err');
       res.json({
         status: 'error',
         msg: err,

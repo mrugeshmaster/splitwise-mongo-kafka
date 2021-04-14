@@ -39,7 +39,6 @@ const usersSchema = new Schema({
   },
   invitations: [Schema.Types.ObjectId],
   memberships: [Schema.Types.ObjectId],
-  bills: [Schema.Types.ObjectId],
 },
 {
   versionKey: false,
