@@ -22,6 +22,11 @@ export default function GroupDetails() {
     dispatch(getGroupDetails(params.groupName));
   }, [dispatch, params.groupName]);
 
+  const handleClose = () => {
+    setShowExpenseModal(false);
+    dispatch(getGroupDetails(params.groupName));
+  };
+
   const groupElements = [];
   if (groupDetails.bills && groupDetails.bills.length > 0) {
     groupDetails.bills.map((bill) => {
@@ -54,7 +59,7 @@ export default function GroupDetails() {
               <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <ExpenseModal
                   show={showExpenseModal}
-                  handleClose={() => setShowExpenseModal(false)}
+                  handleClose={handleClose}
                   groupName={params.groupName}
                 />
                 <Button variant="success" onClick={() => setShowExpenseModal(true)}>Add an Expense</Button>
@@ -70,10 +75,7 @@ export default function GroupDetails() {
           <Col md={{ span: 2 }}>
             <GroupDetailsSideBar
               key={params.groupName}
-              bills={groupDetails.bills}
-              // groupName={this.state.group_name}
-              // updateChild={this.state.updateChild}
-              // onUpdateChild={this.onUpdateChild}
+              sideBarData={groupDetails.sideBarData}
             />
           </Col>
         </Row>

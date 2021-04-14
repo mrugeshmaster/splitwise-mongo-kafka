@@ -44,6 +44,6 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [ ] Settle Up Modal
 - [ ] Recent Activity
 - [x] Left Sidebar
-- [ ] Right Sidebar
+- [x] Right Sidebar
 - [ ] **Comments on Bills**
 - [ ] **Pagination on Recent Activity**

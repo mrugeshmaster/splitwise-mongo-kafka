@@ -28,7 +28,6 @@ class NavBar extends Component {
   render() {
     let navUser = null;
     let nameDropDown = null;
-    // let navLocation = null;
     nameDropDown = (
       <Dropdown>
         <Dropdown.Toggle variant="outline-success" id="dropdown-basic">
