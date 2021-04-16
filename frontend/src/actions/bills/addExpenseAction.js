@@ -5,7 +5,7 @@ import apiHost from '../../apiHost';
 const addExpenseAction = (expenseInfo) => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common.authorization = localStorage.getItem('idToken');
-  axios.post(`${apiHost}/api/bills`, expenseInfo)
+  axios.post(`${apiHost}/api/bills/addexpense`, expenseInfo)
     .then((response) => response.data.message)
     .then((message) => dispatch({
       type: ADD_EXPENSE,

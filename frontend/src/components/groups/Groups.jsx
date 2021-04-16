@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   Row, Col, Container,
 } from 'react-bootstrap';
@@ -18,10 +18,10 @@ export default function Groups() {
   const groupInvites = useSelector((state) => state.getGroupInvitesReducer.groupInvites);
   const groupMemberships = useSelector((st) => st.getGroupMembershipsReducer.groupMemberships);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getGroupInvites());
-    dispatch(getGroupMemberships());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getGroupInvites());
+  //   dispatch(getGroupMemberships());
+  // }, [dispatch]);
 
   const onUpdateInvitation = () => {
     setUpdated(true);

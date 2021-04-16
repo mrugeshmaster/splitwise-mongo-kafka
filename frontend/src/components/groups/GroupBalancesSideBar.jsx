@@ -3,7 +3,6 @@ import { Row, Media, Container } from 'react-bootstrap';
 import numeral from 'numeral';
 
 export default function GroupDetailsSideBar(props) {
-  console.log(props);
   return (
     <Container className="mt-4">
       <div className="text-muted">Group Members</div>

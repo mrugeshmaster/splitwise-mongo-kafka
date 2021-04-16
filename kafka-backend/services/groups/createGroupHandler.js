@@ -31,7 +31,7 @@ const createGroupHandler = async (msg, callback) => {
         );
       });
       res.data = JSON.stringify(group);
-      res.status = 201;
+      res.status = 200;
       callback(null, res);
     });
   }
