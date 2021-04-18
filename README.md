@@ -25,7 +25,7 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Create Bill
 - [x] Get Balance Details
 - [x] Dashboard
-- [ ] Settle Up
+- [x] Settle Up
 - [ ] Recent Activity
 
 ## Frontend
@@ -44,7 +44,7 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Group Memberships
 - [x] Group Details
 - [x] Add Expense Modal
-- [ ] Settle Up Modal
+- [x] Settle Up Modal
 - [ ] Recent Activity
 - [x] Left Sidebar
 - [x] Right Sidebar
