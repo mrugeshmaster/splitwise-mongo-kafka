@@ -11,6 +11,7 @@ import rejectInviteReducer from './group/rejectInviteReducer';
 import getGroupDetailsReducer from './group/getGroupDetailsReducer';
 import addExpenseReducer from './bills/addExpenseReducer';
 import getBalancesReducer from './bills/getBalancesReducer';
+import settleUpReducer from './bills/settleUpReducer';
 
 export default combineReducers({
   login: loginUserReducer,
@@ -25,4 +26,5 @@ export default combineReducers({
   getGroupDetailsReducer,
   addExpenseReducer,
   getBalancesReducer,
+  settleUpReducer,
 });

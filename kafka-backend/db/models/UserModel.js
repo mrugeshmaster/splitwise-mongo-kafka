@@ -30,7 +30,7 @@ const usersSchema = new Schema({
   },
   timezone: {
     type: String,
-    default: 'Americas/Los_Angeles',
+    default: 'America/Los_Angeles',
     required: true,
   },
   image: {

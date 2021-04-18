@@ -6,11 +6,11 @@ const Bill = require('../../db/models/BillModel');
 const getGroupDetailsHandler = (msg, callback) => {
   const res = {};
   Group.findOne({ groupName: msg.groupName })
-    .then(async (group) => {
-      await Bill.find({ groupName: msg.groupName })
+    .then((group) => {
+      Bill.find({ groupName: msg.groupName })
         .populate({ path: 'users.user', select: 'name image' })
         .populate({ path: 'paidby', select: 'name image' })
-        .exec(async (err, bills) => {
+        .exec((err, bills) => {
           if (err) {
             res.status = 404;
             res.data = err;
@@ -22,14 +22,14 @@ const getGroupDetailsHandler = (msg, callback) => {
               groupName: group.groupName,
               groupImage: group.groupImage,
             };
-            await callback(null, res);
+            callback(null, res);
           } else {
             const sideBarDataTemp = bills.map((bill) => bill.users.map((user) => ({
               name: user.user.name,
               image: user.user.image,
               amount: bill.splitAmount * (user.settled ? 0 : (
                 user.collectOrPay === 'COLLECT'
-                  ? bill.users.length - 1 : -1
+                  ? bill.users.filter((_user) => _user.settled === false).length - 1 : -1
               )),
             })))
               .flat(1);

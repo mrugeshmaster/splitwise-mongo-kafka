@@ -31,7 +31,7 @@ const billSchema = new Schema({
     collectOrPay: String,
   }],
   comments: [{
-    name: Schema.Types.ObjectId,
+    user: Schema.Types.ObjectId,
     comment: String,
   }],
 },

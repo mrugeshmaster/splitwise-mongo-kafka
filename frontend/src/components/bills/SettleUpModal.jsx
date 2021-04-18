@@ -1,36 +1,40 @@
-/* eslint-disable max-len */
 import React, {
   useState,
 } from 'react';
-import {
-// useDispatch,
-} from 'react-router';
+
 import {
   Modal, Button, Form, Row, Col,
 } from 'react-bootstrap';
-// import SearchBar from '../SearchBar';
+import numeral from 'numeral';
+import { useDispatch } from 'react-redux';
+import SearchBar from '../SearchBar';
+import settleUpAction from '../../actions/bills/settleUpAction';
 
 export default function SettleUpModal(props) {
   const [inputs, setInputs] = useState({
     settleUpWith: '',
-    settleAmount: '',
+    settleAmount: 0,
   });
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const onSearchName = (name) => {
+    const { amount } = props.payBills.find((payBill) => payBill.name === name) || 0;
+    setInputs(() => ({ settleUpWith: name, settleAmount: amount }));
+  };
 
   const onSave = () => {
     const data = {
-      // groupName: props.groupName,
-      description: inputs.settleUpWith,
-      billAmount: inputs.settleAmount,
+      settleUpWith: inputs.settleUpWith,
+      settleAmount: inputs.settleAmount,
     };
-    console.log(data);
-    // dispatch(addExpenseAction(data));
-    props.handleClose();
+    dispatch(settleUpAction(data));
+    dispatch(props.getBalancesAction());
+    setInputs(() => ({ settleUpWith: '', settleAmount: 0 }));
+    props.onClose();
   };
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setInputs((input) => ({ ...input, [name]: value }));
+  const onClose = () => {
+    setInputs(() => ({ settleUpWith: '', settleAmount: 0 }));
+    props.onClose();
   };
 
   return (
@@ -48,7 +52,7 @@ export default function SettleUpModal(props) {
             You Paid:
           </Col>
           <Col>
-            {/* <SearchBar as="input" names={props.payNames} onSearchName={onChange} /> */}
+            <SearchBar as="input" names={props.payNames} onSearchName={onSearchName} />
           </Col>
         </Row>
         &nbsp;
@@ -57,14 +61,14 @@ export default function SettleUpModal(props) {
             <Form.Control
               name="settleAmount"
               type="text"
-              placeholder="$0.00"
-              onChange={onChange}
+              value={numeral(Math.abs(inputs.settleAmount)).format('$0,0.00')}
+              disabled
             />
           </Col>
         </Row>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.onClose}>
+        <Button variant="secondary" onClick={onClose}>
           Cancel
         </Button>
         <Button variant="primary" onClick={onSave}>
@@ -128,7 +132,8 @@ export default function SettleUpModal(props) {
 //               You Paid:
 //             </Col>
 //             <Col>
-//               <SearchBar as="input" names={this.props.payNames} onSearchName={this.onSearchName} />
+//               <SearchBar as="input"
+// names={this.props.payNames} onSearchName={this.onSearchName} />
 //             </Col>
 //           </Row>
 //           &nbsp;

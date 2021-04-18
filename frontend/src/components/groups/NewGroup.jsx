@@ -79,6 +79,9 @@ class NewGroup extends Component {
 
   render() {
     let redirectVar = null;
+    if (!localStorage.getItem('idToken')) {
+      redirectVar = <Redirect to="/" />;
+    }
     // console.log(this.state.message);
     if (this.state.message === 'GROUP_CREATED') {
       redirectVar = <Redirect to="/home" />;
@@ -102,7 +105,6 @@ class NewGroup extends Component {
     );
 
     if (this.props.users) {
-      // console.log(this.state.invitationListSize);
       for (let i = 1; i <= this.state.invitationListSize; i += 1) {
         invitationForms.push(
           <InvitationForm

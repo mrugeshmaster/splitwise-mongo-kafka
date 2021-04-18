@@ -14,12 +14,18 @@ import getBalancesAction from '../../actions/bills/getBalancesAction';
 
 export default function Home() {
   const [showSettleUpModal, setShowSettleUpModal] = useState(false);
+  const [settledUp, setSettledUp] = useState(false);
   const balances = useSelector((state) => state.getBalancesReducer.balances);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBalancesAction());
-  }, [dispatch]);
+  }, [dispatch, settledUp]);
+
+  const handleClose = () => {
+    setShowSettleUpModal(false);
+    setSettledUp(true);
+  };
 
   let redirectVar = null;
   if (!localStorage.getItem('idToken')) {
@@ -86,10 +92,12 @@ export default function Home() {
             <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <SettleUpModal
                 show={showSettleUpModal}
-                onClose={() => setShowSettleUpModal(false)}
+                onClose={handleClose}
+                getBalancesAction={getBalancesAction}
                 payNames={payNames}
+                payBills={balances ? balances.payBills : []}
               />
-              <Button variant="success" onClick={() => setShowSettleUpModal(true)}>Settle Up</Button>
+              <Button variant="success" onClick={() => { setShowSettleUpModal(true); setSettledUp(false); }}>Settle Up</Button>
             </Col>
           </Row>
           {balances && (

@@ -8,7 +8,16 @@ const getBalancesHandler = (msg, callback) => {
     .then((user) => {
       Bill
         .aggregate([
-          { $match: { $and: [{ 'users.user': user._id }, { paidby: { $ne: user._id } }] } },
+          {
+            $match: {
+              $and: [
+                { 'users.user': user._id },
+                { paidby: { $ne: user._id } },
+                // { 'users.collectOrPay': 'PAY' },
+                // { 'users.settled': false },
+              ],
+            },
+          },
           {
             $project: {
               splitAmount: 1,
@@ -22,6 +31,7 @@ const getBalancesHandler = (msg, callback) => {
                     $and: [
                       { $eq: ['$$users.collectOrPay', 'PAY'] },
                       { $eq: ['$$users.user', user._id] },
+                      { $eq: ['$$users.settled', false] },
                     ],
                   },
                 },
@@ -35,6 +45,7 @@ const getBalancesHandler = (msg, callback) => {
             { path: 'users.user', select: 'name image -_id' },
           ])
             .then((populatedPayBills) => {
+              console.log(populatedPayBills);
               Bill
                 .aggregate([
                   { $match: { $and: [{ 'users.user': user._id }, { paidby: { $eq: user._id } }] } },
@@ -48,6 +59,7 @@ const getBalancesHandler = (msg, callback) => {
                           cond: {
                             $and: [
                               { $eq: ['$$users.collectOrPay', 'PAY'] },
+                              { $eq: ['$$users.settled', false] },
                             ],
                           },
                         },
@@ -59,18 +71,19 @@ const getBalancesHandler = (msg, callback) => {
                     { path: 'users.user', select: 'name image -_id' },
                   ]).then((populatedCollectBills) => {
                     res.status = 200;
-
                     const payBalance = populatedPayBills
-                      .map((payBill) => payBill.splitAmount)
+                      .map((payBill) => (payBill.users.length > 0 ? payBill.splitAmount : 0))
                       .reduce((a, b) => a + b, 0);
 
-                    populatedPayBills = populatedPayBills.map((bill) => ({
-                      name: bill.paidby.name,
-                      image: bill.paidby.image,
-                      amount: bill.splitAmount,
-                    }));
+                    populatedPayBills = populatedPayBills
+                      .map((bill) => (bill.users.length > 0 ? ({
+                        name: bill.paidby.name,
+                        image: bill.paidby.image,
+                        amount: bill.splitAmount,
+                      }) : {}));
 
                     const finalPayBills = _(populatedPayBills)
+                      .filter((obj) => _.has(obj, 'name'))
                       .groupBy('name')
                       .map((objs, key) => ({
                         name: key,

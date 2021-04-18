@@ -13,3 +13,4 @@ export const REJECT_INVITE = 'REJECT_INVITE';
 export const GET_GROUP_DETAILS = 'GET_GROUP_DETAILS';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const GET_BALANCES = 'GET_BALANCES';
+export const SETTLE_UP = 'SETTLE_UP';

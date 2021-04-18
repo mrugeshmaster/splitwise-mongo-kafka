@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import {
@@ -8,7 +7,6 @@ import {
 import userSignUp from '../../actions/account/signUpUserAction';
 import NavBar from '../landing/NavBar';
 import SplitwiseImage from '../../images/logo.svg';
-// import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
   constructor(props) {

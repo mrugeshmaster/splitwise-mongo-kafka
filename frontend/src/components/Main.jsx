@@ -8,6 +8,7 @@ import Home from './home/Home';
 import NewGroup from './groups/NewGroup';
 import Groups from './groups/Groups';
 import GroupDetails from './groups/GroupDetails';
+import RecentActivity from './home/RecentActivity';
 
 export default function Main() {
   return (
@@ -20,6 +21,7 @@ export default function Main() {
       <Route path="/newgroup" component={NewGroup} />
       <Route path="/groups" component={Groups} />
       <Route path="/groupdetails/:groupName" component={GroupDetails} />
+      <Route path="/recentactivity" component={RecentActivity} />
     </div>
   );
 }

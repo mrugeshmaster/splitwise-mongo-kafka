@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import {
   Row, Col, Container,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { ArrowRightSquareFill } from 'react-bootstrap-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import NavBar from '../landing/NavBar';
@@ -18,10 +18,6 @@ export default function Groups() {
   const groupInvites = useSelector((state) => state.getGroupInvitesReducer.groupInvites);
   const groupMemberships = useSelector((st) => st.getGroupMembershipsReducer.groupMemberships);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getGroupInvites());
-  //   dispatch(getGroupMemberships());
-  // }, [dispatch]);
 
   const onUpdateInvitation = () => {
     setUpdated(true);
@@ -37,8 +33,13 @@ export default function Groups() {
     return (() => setUpdated(false));
   }, [dispatch, updated]);
 
+  let redirectVar = null;
+  if (!localStorage.getItem('idToken')) {
+    redirectVar = <Redirect to="/" />;
+  }
   return (
     <div>
+      {redirectVar}
       <NavBar />
       {/* {errorMessage} */}
       <div className="mt-5">

@@ -4,7 +4,7 @@ import {
   Row, Col, Button, ListGroup,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useParams, Redirect } from 'react-router';
 import NavBar from '../landing/NavBar';
 import LeftSidebar from '../landing/LeftSideBar';
 import ExpenseModal from '../bills/ExpenseModal';
@@ -42,8 +42,14 @@ export default function GroupDetails() {
     });
   }
 
+  let redirectVar = null;
+  if (!localStorage.getItem('idToken')) {
+    redirectVar = <Redirect to="/" />;
+  }
+
   return (
     <div>
+      {redirectVar}
       <NavBar />
       <div>
         <Row className="mt-5">

@@ -1,24 +1,23 @@
 import axios from 'axios';
-import { GET_BALANCES } from '../constant-types';
+import { SETTLE_UP } from '../constant-types';
 import apiHost from '../../apiHost';
 
-const getBalancesAction = () => (dispatch) => {
+const settleUpAction = (settleUpInfo) => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common.authorization = localStorage.getItem('idToken');
-  axios.get(`${apiHost}/api/bills/balances`)
+  axios.post(`${apiHost}/api/bills/settleup`, settleUpInfo)
     .then((response) => response.data.message)
     .then((message) => {
-      console.log('Here 4');
-      console.log(message);
+      console.log('Here 2');
       dispatch({
-        type: GET_BALANCES,
+        type: SETTLE_UP,
         payload: message,
       });
     })
     .catch((error) => dispatch({
-      type: GET_BALANCES,
+      type: SETTLE_UP,
       payload: error.response.data.message,
     }));
 };
 
-export default getBalancesAction;
+export default settleUpAction;
