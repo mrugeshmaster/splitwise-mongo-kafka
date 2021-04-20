@@ -2,18 +2,17 @@ const jwtDecode = require('jwt-decode');
 const kafka = require('../../kafka/client');
 
 module.exports = (req, res) => {
-  req.body.path = 'get-groups-memberships';
-
+  req.body.path = 'delete-comment';
   const decodedToken = jwtDecode(req.headers.authorization);
   req.body.userId = decodedToken.id;
-
-  kafka.makeRequest('groups', req.body, (err, results) => {
+  console.log(req.body);
+  kafka.makeRequest('bills', req.body, (err, results) => {
     if (err) {
       res.writeHead(500, {
         'Content-Type': 'application/json',
       });
       res.end({ message: err });
-    } else if (results.status === 404) {
+    } else if (results.status === 400) {
       res.writeHead(404, {
         'Content-Type': 'application/json',
       });
@@ -23,7 +22,7 @@ module.exports = (req, res) => {
         'Content-Type': 'application/json',
       });
       res.end(JSON.stringify({
-        groupMemberships: results.data,
+        message: results.data,
       }));
     }
   });

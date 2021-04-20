@@ -9,7 +9,6 @@ module.exports = (req, res) => {
 
   kafka.makeRequest('groups', req.body, (err, results) => {
     if (err) {
-      // console.log('Inside err');
       res.writeHead(500, {
         'Content-Type': 'application/json',
       });

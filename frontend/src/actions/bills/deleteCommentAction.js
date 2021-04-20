@@ -1,20 +1,20 @@
 import axios from 'axios';
-import { GET_BALANCES } from '../constant-types';
+import { DELETE_COMMENT } from '../constant-types';
 import apiHost from '../../apiHost';
 
-const getBalancesAction = () => (dispatch) => {
+const deleteCommentAction = (commentInfo) => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common.authorization = localStorage.getItem('idToken');
-  axios.get(`${apiHost}/api/bills/balances`)
+  axios.delete(`${apiHost}/api/bills/comments`, { data: commentInfo })
     .then((response) => response.data.message)
     .then((message) => dispatch({
-      type: GET_BALANCES,
+      type: DELETE_COMMENT,
       payload: message,
     }))
     .catch((error) => dispatch({
-      type: GET_BALANCES,
-      payload: error.response.data.message,
+      type: DELETE_COMMENT,
+      payload: error.response.data,
     }));
 };
 
-export default getBalancesAction;
+export default deleteCommentAction;

@@ -1,20 +1,20 @@
 import axios from 'axios';
-import { GET_BALANCES } from '../constant-types';
+import { ADD_COMMENT } from '../constant-types';
 import apiHost from '../../apiHost';
 
-const getBalancesAction = () => (dispatch) => {
+const addCommentAction = (commentInfo) => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common.authorization = localStorage.getItem('idToken');
-  axios.get(`${apiHost}/api/bills/balances`)
+  axios.post(`${apiHost}/api/bills/comments`, commentInfo)
     .then((response) => response.data.message)
     .then((message) => dispatch({
-      type: GET_BALANCES,
+      type: ADD_COMMENT,
       payload: message,
     }))
     .catch((error) => dispatch({
-      type: GET_BALANCES,
-      payload: error.response.data.message,
+      type: ADD_COMMENT,
+      payload: error.response.data,
     }));
 };
 
-export default getBalancesAction;
+export default addCommentAction;

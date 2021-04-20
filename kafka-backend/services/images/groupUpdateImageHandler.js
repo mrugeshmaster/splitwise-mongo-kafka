@@ -3,7 +3,6 @@ const Group = require('../../db/models/GroupModel');
 const groupUpdateImageHandler = async (msg, callback) => {
   const res = {};
   try {
-    // console.log(`msg GroupName : ${msg.groupName}`);
     const group = await Group.findOne({ name: msg.groupName });
     if (!group) {
       res.status = 404;

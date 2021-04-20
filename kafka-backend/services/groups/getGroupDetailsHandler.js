@@ -9,6 +9,7 @@ const getGroupDetailsHandler = (msg, callback) => {
     .then((group) => {
       Bill.find({ groupName: msg.groupName })
         .populate({ path: 'users.user', select: 'name image' })
+        .populate({ path: 'comments.user', select: 'name' })
         .populate({ path: 'paidby', select: 'name image' })
         .exec((err, bills) => {
           if (err) {

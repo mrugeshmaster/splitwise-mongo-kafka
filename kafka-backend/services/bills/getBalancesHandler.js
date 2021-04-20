@@ -13,8 +13,6 @@ const getBalancesHandler = (msg, callback) => {
               $and: [
                 { 'users.user': user._id },
                 { paidby: { $ne: user._id } },
-                // { 'users.collectOrPay': 'PAY' },
-                // { 'users.settled': false },
               ],
             },
           },
@@ -45,7 +43,6 @@ const getBalancesHandler = (msg, callback) => {
             { path: 'users.user', select: 'name image -_id' },
           ])
             .then((populatedPayBills) => {
-              console.log(populatedPayBills);
               Bill
                 .aggregate([
                   { $match: { $and: [{ 'users.user': user._id }, { paidby: { $eq: user._id } }] } },

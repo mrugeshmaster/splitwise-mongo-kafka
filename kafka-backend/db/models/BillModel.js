@@ -31,8 +31,16 @@ const billSchema = new Schema({
     collectOrPay: String,
   }],
   comments: [{
-    user: Schema.Types.ObjectId,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
     comment: String,
+    commentCreatedAt: {
+      type: Date,
+      default: Date.now,
+      required: true,
+    },
   }],
 },
 {

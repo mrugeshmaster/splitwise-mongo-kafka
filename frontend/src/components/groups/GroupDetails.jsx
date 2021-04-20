@@ -35,6 +35,7 @@ export default function GroupDetails() {
           <GroupDetailsCell
             key={bill.description}
             bill={bill}
+            getGroupDetails={getGroupDetails}
           />
         </ListGroup.Item>
       );

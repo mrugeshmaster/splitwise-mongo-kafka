@@ -14,3 +14,6 @@ export const GET_GROUP_DETAILS = 'GET_GROUP_DETAILS';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const GET_BALANCES = 'GET_BALANCES';
 export const SETTLE_UP = 'SETTLE_UP';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const GET_COMMENTS = 'GET_COMMENTS';

@@ -8,7 +8,6 @@ const createGroupHandler = async (msg, callback) => {
     res.status = 400;
     callback(null, res);
   } else {
-    // const group = new Group(msg);
     Group.create({ groupName: msg.groupName, members: [msg.userId] }, (groupErr, group) => {
       if (groupErr) {
         res.status = 404;
@@ -25,7 +24,9 @@ const createGroupHandler = async (msg, callback) => {
           { $push: { invitations: group._id } },
           async (err) => {
             if (err) {
-              console.log(err);
+              res.status = 404;
+              res.data = err;
+              callback(null, res);
             }
           },
         );

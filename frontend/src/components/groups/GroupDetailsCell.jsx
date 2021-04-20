@@ -1,10 +1,13 @@
 import React from 'react';
 import {
-  Row, Col, Accordion, Media, Container,
+  Row, Col, Accordion, Container,
 } from 'react-bootstrap';
 import Moment from 'react-moment';
-import '../../App.css';
 import numeral from 'numeral';
+import { Divider } from '@material-ui/core';
+import '../../App.css';
+import BillDetails from '../bills/BillDetails';
+import BillComments from '../bills/BillComments';
 
 export default function GroupDetailsCell(props) {
   return (
@@ -58,45 +61,14 @@ export default function GroupDetailsCell(props) {
       </Accordion.Toggle>
       <Accordion.Collapse eventKey="1">
         <Container>
-          <Row>
-            <Col>
-              <Media>
-                <img
-                  width={64}
-                  height={64}
-                  className="mr-3"
-                  src="https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/uncategorized/general@2x.png"
-                  alt="Generic placeholder"
-                />
-                <Media.Body>
-                  <Row className="pl-2">{props.bill.description}</Row>
-                  <Row className="pl-2">
-                    {numeral(Math.abs(props.bill.splitAmount)).format('$0,0.00')}
-                  </Row>
-                  <Row className="pl-2 billdate" style={{ fontSize: '0.8rem' }}>
-                    Added by
-                    {' '}
-                    {props.bill.paidby.name}
-                    {' '}
-                    on
-                    &nbsp;
-                    <Moment
-                      tz={localStorage.getItem('timezone')}
-                      format="MMMM DD, YYYY"
-                    >
-                      {props.bill.date}
-                    </Moment>
-                  </Row>
-                </Media.Body>
-              </Media>
-            </Col>
-          </Row>
-          <Row>
-            <Col />
-            <Col>
-              <Row className="billdate">Notes and Comments</Row>
-            </Col>
-          </Row>
+          <BillDetails
+            bill={props.bill}
+          />
+          <Divider className="my-3" />
+          <BillComments
+            bill={props.bill}
+            getGroupDetails={props.getGroupDetails}
+          />
         </Container>
       </Accordion.Collapse>
     </Accordion>

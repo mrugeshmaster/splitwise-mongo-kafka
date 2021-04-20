@@ -12,7 +12,6 @@ router.post('/', async (req, res) => {
   req.body.path = 'user-signup';
   kafka.makeRequest('account', req.body, (err, results) => {
     if (err) {
-      // console.log('Inside err');
       res.json({
         status: 'error',
         msg: 'System Error, Try Again.',
@@ -23,8 +22,6 @@ router.post('/', async (req, res) => {
       });
       res.end(JSON.stringify({ message: results.message }));
     } else {
-      // const data = JSON.parse(results.data);
-      // console.log(`Id: ${data._id}`);
       const token = jwt.sign({
         id: results.data._id,
       },

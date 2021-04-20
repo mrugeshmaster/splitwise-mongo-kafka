@@ -61,20 +61,15 @@ class NewGroup extends Component {
   }
 
   onCancel = () => {
-    // console.log(email);
     this.setState((prevState) => ({ invitationListSize: prevState.invitationListSize - 1 }));
   }
 
   onAddInvitationForm = () => {
-    // invitationListSize;
     this.setState((prevState) => ({ invitationListSize: prevState.invitationListSize + 1 }));
   }
 
   addInvitedMembers = async (invitedMember) => {
-    // console.log(invitedMember);
-    // console.log(this.state.invitedMembers);
     await this.setState((prevState) => ({ invitedMembers: [...prevState.invitedMembers, invitedMember] }));
-    // console.log(this.state.invitedMembers);
   }
 
   render() {
@@ -82,7 +77,6 @@ class NewGroup extends Component {
     if (!localStorage.getItem('idToken')) {
       redirectVar = <Redirect to="/" />;
     }
-    // console.log(this.state.message);
     if (this.state.message === 'GROUP_CREATED') {
       redirectVar = <Redirect to="/home" />;
     }

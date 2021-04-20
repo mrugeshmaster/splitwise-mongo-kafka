@@ -8,7 +8,6 @@ import SearchBar from '../SearchBar';
 export default function InvitationForm(props) {
   const [email, setEmail] = useState('');
   const [nameErrorMessage, setNameErrorMessage] = useState('');
-  console.log(props);
   const names = props.users && props.users.map((res) => res.name);
 
   const onChangeInvitationEmail = (e) => {

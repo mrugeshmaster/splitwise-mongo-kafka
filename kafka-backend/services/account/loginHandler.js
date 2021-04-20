@@ -6,15 +6,12 @@ const loginHandler = async (msg, callback) => {
   User
     .findOne({ email: msg.email })
     .then((user) => {
-      console.log(user);
       if (!user) {
         res.status = 400;
         callback(null, res);
       } else {
         bcrypt.compare(msg.password, user.password, async (err, match) => {
-          console.log(`Match: ${match}`);
           if (err) {
-            console.log('in bcrypt error');
             callback(
               null,
               {
@@ -25,7 +22,6 @@ const loginHandler = async (msg, callback) => {
             );
           }
           if (!match) {
-            console.log('in match error');
             callback(null, { status: 403, res: 'INCORRECT_PASSWORD' });
           }
           res.data = {
@@ -39,12 +35,13 @@ const loginHandler = async (msg, callback) => {
             _id: user._id,
           };
           res.status = 200;
-          // res.data = JSON.stringify(user);
           callback(null, res);
         });
       }
     }).catch((e) => {
-      console.log(e);
+      res.status = 400;
+      res.data = e;
+      callback(null, res);
     });
 };
 

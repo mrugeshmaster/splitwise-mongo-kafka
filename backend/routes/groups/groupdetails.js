@@ -7,7 +7,6 @@ module.exports = (req, res) => {
   const decodedToken = jwtDecode(req.headers.authorization);
   req.body.userId = decodedToken.id;
   kafka.makeRequest('groups', req.body, (err, results) => {
-    console.log(results);
     if (err) {
       res.writeHead(500, {
         'Content-Type': 'application/json',

@@ -1,5 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-underscore-dangle */
 const User = require('../../db/models/UserModel');
 
 const getAllUsersHandler = async (msg, callback) => {
@@ -8,7 +6,6 @@ const getAllUsersHandler = async (msg, callback) => {
     .find({ _id: { $ne: msg.userId } }, { _id: 0, name: 1, email: 1 })
     .then((result) => {
       if (result.length > 0) {
-        console.log(result);
         res.status = 200;
         res.data = [...result];
         callback(null, res);
@@ -18,7 +15,9 @@ const getAllUsersHandler = async (msg, callback) => {
       }
     })
     .catch((e) => {
-      console.log(e);
+      res.status = 404;
+      res.data = e;
+      callback(null, res);
     });
 };
 
