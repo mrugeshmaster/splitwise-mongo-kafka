@@ -49,5 +49,5 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Left Sidebar
 - [x] Right Sidebar
 - [x] Accordion for bills
-- [ ] **Comments on Bills**
+- [x] **Comments on Bills**
 - [ ] **Pagination on Recent Activity**
