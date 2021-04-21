@@ -7,9 +7,7 @@ const profile = require('./routes/profile');
 const images = require('./routes/images');
 const groups = require('./routes/groups');
 const bills = require('./routes/bills');
-// const balances = require('./routes/balances');
-// const settle = require('./routes/settle');
-// const recentactivity = require('./routes/recentactivity');
+const activity = require('./routes/activity');
 
 app.use('/api/ping', ping);
 app.use('/api/login', login);
@@ -18,9 +16,7 @@ app.use('/api/profile', profile);
 app.use('/api/images', images);
 app.use('/api/groups', groups);
 app.use('/api/bills', bills);
-// app.use('/api/balances', balances);
-// app.use('/api/settle', settle);
-// app.use('/api/recentactivity', recentactivity);
+app.use('/api/activity', activity);
 
 const port = process.env.PORT || 3001;
 

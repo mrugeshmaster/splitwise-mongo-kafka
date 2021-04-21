@@ -1,4 +1,4 @@
-const Bill = require('../../db/models/BillModel');
+const Bill = require('../../db/models/Bill');
 
 const deleteCommentHandler = (msg, callback) => {
   const res = {};

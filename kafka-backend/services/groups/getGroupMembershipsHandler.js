@@ -1,5 +1,5 @@
-const User = require('../../db/models/UserModel');
-const Group = require('../../db/models/GroupModel');
+const User = require('../../db/models/User');
+const Group = require('../../db/models/Group');
 
 const getGroupMembershipsHandler = (msg, callback) => {
   const res = {};

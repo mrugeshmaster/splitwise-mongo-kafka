@@ -1,5 +1,5 @@
-const Bill = require('../../db/models/BillModel');
-const User = require('../../db/models/UserModel');
+const Bill = require('../../db/models/Bill');
+const User = require('../../db/models/User');
 
 const addCommentHandler = (msg, callback) => {
   const res = {};

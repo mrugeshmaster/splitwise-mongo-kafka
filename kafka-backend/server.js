@@ -8,6 +8,7 @@ const users = require('./services/users');
 const images = require('./services/images');
 const groups = require('./services/groups');
 const bills = require('./services/bills');
+const activity = require('./services/activity');
 
 require('./db/mongoose');
 
@@ -49,3 +50,4 @@ handleTopicRequest('users', users);
 handleTopicRequest('images', images);
 handleTopicRequest('groups', groups);
 handleTopicRequest('bills', bills);
+handleTopicRequest('activity', activity);

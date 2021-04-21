@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 const _ = require('lodash');
-const Group = require('../../db/models/GroupModel');
-const Bill = require('../../db/models/BillModel');
+const Group = require('../../db/models/Group');
+const Bill = require('../../db/models/Bill');
 
 const getGroupDetailsHandler = (msg, callback) => {
   const res = {};

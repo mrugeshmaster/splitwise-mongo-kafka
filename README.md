@@ -26,7 +26,7 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Get Balance Details
 - [x] Dashboard
 - [x] Settle Up
-- [ ] Recent Activity
+- [x] Recent Activity
 
 ## Frontend
 

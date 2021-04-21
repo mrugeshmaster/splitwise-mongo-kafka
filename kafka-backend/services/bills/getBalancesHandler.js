@@ -1,6 +1,6 @@
 const _ = require('lodash');
-const User = require('../../db/models/UserModel');
-const Bill = require('../../db/models/BillModel');
+const User = require('../../db/models/User');
+const Bill = require('../../db/models/Bill');
 
 const getBalancesHandler = (msg, callback) => {
   const res = {};

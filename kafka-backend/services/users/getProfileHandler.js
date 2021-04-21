@@ -1,4 +1,4 @@
-const User = require('../../db/models/UserModel');
+const User = require('../../db/models/User');
 
 const getProfileHandler = async (msg, callback) => {
   const res = {};

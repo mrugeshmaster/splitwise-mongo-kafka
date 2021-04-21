@@ -24,6 +24,10 @@ export default function BillComments(props) {
     setComment('');
   }, [activity]);
 
+  const updateActivity = () => {
+    setActivity(true);
+  };
+
   const postComment = () => {
     const data = {
       description: props.bill.description,
@@ -49,6 +53,7 @@ export default function BillComments(props) {
             bill={props.bill}
             comment={c}
             getGroupDetails={props.getGroupDetails}
+            updateActivity={updateActivity}
           />
         ))}
         <Form.Group as={Row}>

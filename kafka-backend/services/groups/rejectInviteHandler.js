@@ -1,5 +1,5 @@
-const Group = require('../../db/models/GroupModel');
-const User = require('../../db/models/UserModel');
+const Group = require('../../db/models/Group');
+const User = require('../../db/models/User');
 
 const rejectInviteHandler = async (msg, callback) => {
   const res = {};

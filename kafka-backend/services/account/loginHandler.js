@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../../db/models/UserModel');
+const User = require('../../db/models/User');
 
 const loginHandler = async (msg, callback) => {
   const res = {};

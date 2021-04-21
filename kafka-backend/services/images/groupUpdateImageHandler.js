@@ -1,4 +1,4 @@
-const Group = require('../../db/models/GroupModel');
+const Group = require('../../db/models/Group');
 
 const groupUpdateImageHandler = async (msg, callback) => {
   const res = {};

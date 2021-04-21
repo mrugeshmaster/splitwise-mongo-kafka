@@ -1,4 +1,4 @@
-const User = require('../db/models/UserModel');
+const User = require('../db/models/User');
 
 const passportHandler = async (msg, callback) => {
   const res = {};

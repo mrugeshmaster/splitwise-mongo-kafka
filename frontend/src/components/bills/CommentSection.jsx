@@ -15,19 +15,16 @@ export default function CommentSection(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const deleteComment = (e) => {
-    console.log(props.comment);
-    console.log(e);
+  const deleteComment = () => {
     const data = {
       description: props.bill.description,
       groupName: props.bill.groupName,
       id: props.comment._id,
     };
-    console.log(data);
     dispatch(deleteCommentAction(data));
     dispatch(props.getGroupDetails(props.bill.groupName));
     handleClose();
-    // setActivity(true);
+    props.updateActivity();
   };
 
   return (
