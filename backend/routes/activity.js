@@ -23,7 +23,7 @@ router.get('/', checkAuth, (req, res) => {
       res.writeHead(results.status, {
         'Content-Type': 'application/json',
       });
-      res.end(JSON.stringify({ message: results.message }));
+      res.end(JSON.stringify({ activities: results.data }));
     }
   });
 });

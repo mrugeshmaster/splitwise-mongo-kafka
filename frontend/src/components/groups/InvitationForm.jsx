@@ -27,37 +27,33 @@ export default function InvitationForm(props) {
   };
 
   return (
-    <div>
-      <Form>
-        <Form.Row className="md-0 pd-0">
-          <Form.Group as={Col} md="4">
-            {names
-            && (
-            <SearchBar
-              names={names}
-              onSearchName={onSearchName}
-            />
-            )}
-          </Form.Group>
-          <Form.Group as={Col} md="4">
-            <Form.Control
-              type="email"
-              name="invitationEmail"
-              value={email}
-              placeholder="Email"
-              onChange={onChangeInvitationEmail}
-            />
-          </Form.Group>
-          <Form.Group className="d-flex m-0 p-0" fluid>
-            <Form.Group as={Col} md="auto ml-1 pl-1">
-              <Button variant="outline-danger" id="cancel" onClick={props.onCancel}>
-                <X />
-              </Button>
-            </Form.Group>
-          </Form.Group>
-          {nameErrorMessage}
-        </Form.Row>
-      </Form>
-    </div>
+    <Form.Row>
+      <Form.Group as={Col} md="4">
+        {names
+        && (
+        <SearchBar
+          names={names}
+          onSearchName={onSearchName}
+        />
+        )}
+      </Form.Group>
+      <Form.Group as={Col} md="4">
+        <Form.Control
+          type="email"
+          name="invitationEmail"
+          value={email}
+          placeholder="Email"
+          onChange={onChangeInvitationEmail}
+        />
+      </Form.Group>
+      <Form.Group className="d-flex m-0 p-0">
+        <Form.Group as={Col} md="auto ml-1 pl-1">
+          <Button variant="outline-danger" id="cancel" onClick={props.onCancel}>
+            <X />
+          </Button>
+        </Form.Group>
+      </Form.Group>
+      {nameErrorMessage}
+    </Form.Row>
   );
 }

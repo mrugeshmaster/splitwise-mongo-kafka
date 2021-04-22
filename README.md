@@ -16,7 +16,7 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Profile Update
 - [x] User Image Upload
 - [x] Group Create
-- [ ] Group Image Upload
+- [x] Group Image Upload
 - [x] Group List
 - [x] Group Invite
 - [x] Group Reject
@@ -38,7 +38,7 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] SignUp
 - [x] Profile
 - [x] Create Group
-- [ ] Group Image Upload
+- [x] Group Image Upload
 - [x] Groups
 - [x] Group Invitations
 - [x] Group Memberships

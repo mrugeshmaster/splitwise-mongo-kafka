@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { CREATE_GROUP, GET_ALL_USERS } from '../constant-types';
+import {
+  CREATE_GROUP, GET_ALL_USERS, RESET_MESSAGE, UPLOAD_GROUP_IMAGE,
+} from '../constant-types';
 import apiHost from '../../apiHost';
 
 const getAllUsers = () => (dispatch) => {
@@ -32,4 +34,34 @@ const createGroup = (groupInfo) => (dispatch) => {
     }));
 };
 
-export { getAllUsers, createGroup };
+const resetGroupMessage = () => (dispatch) => {
+  dispatch({
+    type: RESET_MESSAGE,
+  });
+};
+
+const uploadGroupImage = (groupImageInfo) => (dispatch) => {
+  axios.defaults.withCredentials = true;
+  axios.defaults.headers.common.authorization = localStorage.getItem('idToken');
+  const formData = new FormData();
+  formData.append('groupImage', groupImageInfo.groupImage);
+  const uploadConfig = {
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  };
+  axios.put(`${apiHost}/api/images/group`, formData, uploadConfig)
+    .then((response) => response.data)
+    .then((groupImageDetails) => dispatch({
+      type: UPLOAD_GROUP_IMAGE,
+      payload: groupImageDetails,
+    }))
+    .catch((error) => dispatch({
+      type: UPLOAD_GROUP_IMAGE,
+      payload: error.response.data.message,
+    }));
+};
+
+export {
+  getAllUsers, createGroup, uploadGroupImage, resetGroupMessage,
+};

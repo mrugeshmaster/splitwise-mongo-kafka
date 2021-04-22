@@ -1,53 +1,67 @@
-/* eslint-disable no-lone-blocks */
 const Activity = require('../../db/models/Activity');
+const User = require('../../db/models/User');
 
 const getActivityHandler = async (msg, callback) => {
   const res = {};
-  { /*
-    count = 5
-    pageSize = 2
 
-    limit = 3
-
-    count = 5
-    pageSize = 5
-    limit = 1
-
-    count = 5
-    pageSize = 10
-
-    limit = 1
-
-  */ }
-  const filter = msg.groupName
-    ? ({ groupName: msg.groupName, user: msg.userId })
-    : ({ user: msg.userId });
-
-  const count = await Activity.countDocuments({ user: msg.userId });
-  console.log(count, msg.pageSize);
   const options = {
+    sort: msg.order === 'DESC' ? -1 : 1,
     page: parseInt(msg.page, 10),
-    limit: Math.ceil(count / msg.pageSize),
+    limit: parseInt(msg.pageSize, 10),
   };
-  console.log(Math.ceil(count / msg.pageSize));
-  console.log(options);
-  Activity.find(filter)
-    .sort({ timePosted: msg.order })
-    .skip((options.limit * options.page) - options.limit)
-    .limit(options.limit)
-    .populate({ path: 'user', select: 'name image' })
-    .exec((err, activities) => {
-      if (err) {
-        console.log(err);
-        res.status = 500;
-        res.message = err;
-        callback(null, res);
-      } else {
-        // console.log(activities);
-        res.status = 200;
-        res.message = activities;
-        callback(null, res);
-      }
+
+  User.findById(msg.userId)
+    .then(async (user) => {
+      const filter = msg.groupName
+        ? ({ groupName: msg.groupName, 'users.user': user._id })
+        : ({ 'users.user': user._id });
+      const count = msg.groupName
+        ? (await Activity.countDocuments({ groupName: msg.groupName, 'users.user': user._id }))
+        : (await Activity.countDocuments({ 'users.user': msg.userId }));
+      Activity
+        .aggregate([
+          { $match: filter },
+          {
+            $addFields: {
+              users: {
+                $filter: {
+                  input: '$users',
+                  as: 'users',
+                  cond: {
+                    $eq: ['$$users.user', user._id],
+                  },
+                },
+              },
+            },
+          },
+          {
+            $sort: { timePosted: options.sort },
+          },
+          {
+            $skip: (options.limit * options.page) - options.limit,
+          },
+          {
+            $limit: options.limit,
+          },
+        ]).then((ac) => {
+          Activity.populate(ac, [
+            {
+              path: 'users.user',
+              select: 'name image',
+            },
+            {
+              path: 'paidby',
+              select: 'name image',
+            },
+          ]).then((popAc) => {
+            res.status = 200;
+            res.data = {
+              activities: popAc,
+              pages: Math.ceil(count / options.limit),
+            };
+            callback(null, res);
+          });
+        });
     });
 };
 

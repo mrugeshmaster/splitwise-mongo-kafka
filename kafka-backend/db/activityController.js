@@ -4,10 +4,11 @@ const activityController = (data) => {
   Activity.create({
     activity: data.activity,
     billDescription: data.billDescription,
-    user: data.user,
+    paidby: data.paidby,
+    users: data.users,
     groupName: data.groupName,
-    collectOrPay: data.collectOrPay,
-    amount: data.amount,
+    // collectOrPay: data.collectOrPay,
+    // amount: data.amount,
   });
 };
 

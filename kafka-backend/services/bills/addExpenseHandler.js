@@ -25,20 +25,41 @@ const addExpenseHandler = (msg, callback) => {
           res.data = err;
           callback(null, res);
         } else if (bill) {
-          bill.users.map((user) => {
-            const data = {
-              activity: 'CREATE',
+          // console.log(bill.users);
+          const users = bill.users.map((user) => (
+            {
               user: user.user,
-              billDescription: bill.description,
-              groupName: group.groupName,
+              settled: user.settled,
               collectOrPay: user.collectOrPay,
               amount: bill.splitAmount * (user.settled ? 0 : (
                 user.collectOrPay === 'COLLECT'
                   ? bill.users.filter((_user) => _user.settled === false).length - 1 : -1
               )),
-            };
-            activityController(data);
-          });
+            }
+          ));
+          const data = {
+            activity: 'CREATE',
+            paidby: bill.paidby,
+            billDescription: bill.description,
+            groupName: group.groupName,
+            users,
+          };
+          activityController(data);
+
+          // bill.users.map((user) => {
+          //   const data = {
+          //     activity: 'CREATE',
+          //     user: user.user,
+          //     billDescription: bill.description,
+          //     groupName: group.groupName,
+          //     collectOrPay: user.collectOrPay,
+          //     amount: bill.splitAmount * (user.settled ? 0 : (
+          //       user.collectOrPay === 'COLLECT'
+          //         ? bill.users.filter((_user) => _user.settled === false).length - 1 : -1
+          //     )),
+          //   };
+          //   activityController(data);
+          // });
           res.status = 200;
           res.data = 'BILL_CREATED';
           callback(null, res);

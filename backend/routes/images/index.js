@@ -15,7 +15,7 @@ router.put(
 );
 
 router.put(
-  '/group/:groupName',
+  '/group',
   checkAuth,
   groupImageUpload,
   group,

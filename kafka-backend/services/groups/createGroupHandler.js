@@ -8,7 +8,9 @@ const createGroupHandler = async (msg, callback) => {
     res.status = 400;
     callback(null, res);
   } else {
-    Group.create({ groupName: msg.groupName, members: [msg.userId] }, (groupErr, group) => {
+    Group.create({
+      groupName: msg.groupName, members: [msg.userId], groupImage: msg.groupImage,
+    }, (groupErr, group) => {
       if (groupErr) {
         res.status = 404;
         callback(null, res);

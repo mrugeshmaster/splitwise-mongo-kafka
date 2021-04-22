@@ -10,7 +10,7 @@ const groupImageUpload = multer({
     key: (req, file, cb) => {
       cb(
         null,
-        `groupImages/${req.params.groupName}_${Date.now()}${file.originalname}`,
+        `groupImages/groupImage_${Date.now()}${file.originalname}`,
       );
     },
   }),

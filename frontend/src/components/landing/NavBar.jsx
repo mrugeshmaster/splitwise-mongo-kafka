@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import {
   Navbar, Nav, Dropdown, Image, Col,
@@ -33,9 +34,9 @@ export default function NavBar() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item><Link to="/profile" className="nav-link">Your Account</Link></Dropdown.Item>
-        <Dropdown.Item><Link to="/newgroup" className="nav-link">Create a Group</Link></Dropdown.Item>
-        <Dropdown.Item><Link to="/" className="nav-link" onClick={handleLogout}>Log out</Link></Dropdown.Item>
+        <Link to="/profile" className="nav-link">Your Account</Link>
+        <Link to="/newgroup" className="nav-link">Create a Group</Link>
+        <Link to="/" className="nav-link" onClick={handleLogout}>Log out</Link>
       </Dropdown.Menu>
     </Dropdown>
   );

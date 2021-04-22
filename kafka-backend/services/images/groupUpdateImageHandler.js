@@ -12,13 +12,15 @@ const groupUpdateImageHandler = async (msg, callback) => {
       group.save((saveError) => {
         if (saveError) {
           res.status = 500;
-          res.message = 'Error in Data';
+          res.message = saveError;
         } else {
-          const userObject = {
+          // const userObject = {
+          //   groupImageURL: group.image,
+          // };
+          res.status = 200;
+          res.data = {
             groupImageURL: group.image,
           };
-          res.status = 200;
-          res.message = userObject;
         }
         callback(null, res);
       });

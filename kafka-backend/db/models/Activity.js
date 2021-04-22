@@ -6,10 +6,19 @@ const activitySchema = new Schema({
   activity: {
     type: String,
   },
-  user: {
-    type: String,
+  paidby: {
+    type: Schema.Types.ObjectId,
     ref: 'user',
   },
+  users: [{
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
+    settled: Boolean,
+    collectOrPay: String,
+    amount: Number,
+  }],
   billDescription: {
     type: String,
   },

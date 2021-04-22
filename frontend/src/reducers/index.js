@@ -14,6 +14,7 @@ import getBalancesReducer from './bills/getBalancesReducer';
 import settleUpReducer from './bills/settleUpReducer';
 import addCommentReducer from './bills/addCommentReducer';
 import deleteCommentReducer from './bills/deleteCommentReducer';
+import getActivityReducer from './activity/getActivityReducer';
 
 export default combineReducers({
   login: loginUserReducer,
@@ -31,4 +32,5 @@ export default combineReducers({
   settleUpReducer,
   addCommentReducer,
   deleteCommentReducer,
+  getActivityReducer,
 });
