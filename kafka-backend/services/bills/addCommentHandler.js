@@ -1,5 +1,6 @@
 const Bill = require('../../db/models/Bill');
 const User = require('../../db/models/User');
+const { activityController } = require('../../db/activityController');
 
 const addCommentHandler = (msg, callback) => {
   const res = {};
@@ -19,7 +20,16 @@ const addCommentHandler = (msg, callback) => {
         }, {
           new: true,
         })
-        .then(() => {
+        .then((bill) => {
+          const data = {
+            activity: 'UPDATE',
+            paidby: user._id,
+            billDescription: bill.description,
+            groupName: bill.groupName,
+            users: bill.users,
+          };
+          activityController(data);
+
           res.status = 200;
           res.data = 'COMMENT_CREATED';
           callback(null, res);

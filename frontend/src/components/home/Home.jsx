@@ -33,6 +33,11 @@ export default function Home() {
   }
 
   const payNames = balances && balances.payBills.map((payBill) => payBill.name);
+  const collectNames = balances && balances.collectBills.map((collectBill) => collectBill.name);
+  // const names = {
+  //   payNames,
+  //   collectNames,
+  // };
   const payItems = balances && balances.payBills.map((payBill) => (
     <Media as="li" className="py-3" key={payBill.name}>
       <img
@@ -95,7 +100,9 @@ export default function Home() {
                 onClose={handleClose}
                 getBalancesAction={getBalancesAction}
                 payNames={payNames}
+                collectNames={collectNames}
                 payBills={balances ? balances.payBills : []}
+                collectBills={balances ? balances.collectBills : []}
               />
               <Button variant="success" onClick={() => { setShowSettleUpModal(true); setSettledUp(false); }}>Settle Up</Button>
             </Col>

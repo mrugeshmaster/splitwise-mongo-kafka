@@ -5,6 +5,7 @@ const { getGroupMembershipsHandler } = require('./getGroupMembershipsHandler');
 const { getAllUsersHandler } = require('./getAllUsersHandler');
 const { acceptInviteHandler } = require('./acceptInviteHandler');
 const { rejectInviteHandler } = require('./rejectInviteHandler');
+const { leaveGroupHandler } = require('./leaveGroupHandler');
 
 function handleRequest(msg, callback) {
   if (msg.path === 'create-new-group') {
@@ -28,6 +29,9 @@ function handleRequest(msg, callback) {
   } else if (msg.path === 'get-all-users') {
     delete msg.path;
     getAllUsersHandler(msg, callback);
+  } else if (msg.path === 'group-leave') {
+    delete msg.path;
+    leaveGroupHandler(msg, callback);
   }
 }
 exports.handleRequest = handleRequest;

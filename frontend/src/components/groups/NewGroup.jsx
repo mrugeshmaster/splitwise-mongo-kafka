@@ -3,7 +3,6 @@ import {
   Row, Col, Form, Button, Image, Alert,
 } from 'react-bootstrap';
 import { Redirect } from 'react-router';
-// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Divider } from '@material-ui/core';
 import NavBar from '../landing/NavBar';
@@ -31,11 +30,10 @@ export default function NewGroup() {
     dispatch(resetGroupMessage());
     dispatch(getAllUsers());
     if (groupImageDetails && groupImageDetails.message === 'IMAGE_UPLOADED') {
-      setGroupImageFileURL(groupImageDetails.groupDetails.groupImageURL);
+      setGroupImageFileURL(groupImageDetails.groupImageURL);
       groupImageDetails.message = '';
     }
   }, [dispatch, groupImageDetails, message]);
-
   const onSave = (e) => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -49,8 +47,8 @@ export default function NewGroup() {
         invitedMembers,
         groupImage: groupImageFileURL,
       };
-      dispatch(createGroup(data));
       setSaveFormValidated(true);
+      dispatch(createGroup(data));
     }
   };
 

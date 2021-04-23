@@ -2,33 +2,21 @@ const Group = require('../../db/models/Group');
 
 const groupUpdateImageHandler = async (msg, callback) => {
   const res = {};
-  try {
-    const group = await Group.findOne({ name: msg.groupName });
-    if (!group) {
-      res.status = 404;
-      callback(null, res);
-    } else {
-      group.image = msg.fileUrl;
-      group.save((saveError) => {
-        if (saveError) {
-          res.status = 500;
-          res.message = saveError;
-        } else {
-          // const userObject = {
-          //   groupImageURL: group.image,
-          // };
-          res.status = 200;
-          res.data = {
-            groupImageURL: group.image,
-          };
-        }
-        callback(null, res);
-      });
-    }
-  } catch (e) {
+  Group.findOneAndUpdate(
+    { name: msg.groupName },
+    { $set: { groupImage: msg.fileUrl } },
+    { new: true },
+  ).then((group) => {
+    res.status = 200;
+    res.data = {
+      groupImageURL: group.image,
+    };
+    callback(null, res);
+  }).catch((err) => {
     res.status = 500;
-    callback(null, 'error');
-  }
+    res.data = err;
+    callback(null, err);
+  });
 };
 
 exports.groupUpdateImageHandler = groupUpdateImageHandler;

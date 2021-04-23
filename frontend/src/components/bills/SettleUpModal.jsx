@@ -14,17 +14,21 @@ export default function SettleUpModal(props) {
   const [inputs, setInputs] = useState({
     settleUpWith: '',
     settleAmount: 0,
+    settleType: '',
   });
   const dispatch = useDispatch();
   const onSearchName = (name) => {
-    const { amount } = props.payBills.find((payBill) => payBill.name === name) || 0;
-    setInputs(() => ({ settleUpWith: name, settleAmount: amount }));
+    const { amount } = props.payBills.find((payBill) => payBill.name === name)
+    || props.collectBills.find((collectBill) => collectBill.name === name);
+    const type = props.payBills.find((payBill) => payBill.name === name) ? 'PAY' : 'COLLECT';
+    setInputs(() => ({ settleUpWith: name, settleAmount: amount, settleType: type }));
   };
 
   const onSave = () => {
     const data = {
       settleUpWith: inputs.settleUpWith,
       settleAmount: inputs.settleAmount,
+      settleType: inputs.settleType,
     };
     dispatch(settleUpAction(data));
     dispatch(props.getBalancesAction());
@@ -36,6 +40,10 @@ export default function SettleUpModal(props) {
     setInputs(() => ({ settleUpWith: '', settleAmount: 0 }));
     props.onClose();
   };
+
+  const names = props.payNames && props.collectNames
+    ? [...props.payNames, ...props.collectNames]
+    : [];
 
   return (
     <Modal show={props.show} onHide={props.onClose}>
@@ -52,7 +60,7 @@ export default function SettleUpModal(props) {
             You Paid:
           </Col>
           <Col>
-            <SearchBar as="input" names={props.payNames} onSearchName={onSearchName} />
+            <SearchBar as="input" names={names} onSearchName={onSearchName} />
           </Col>
         </Row>
         &nbsp;

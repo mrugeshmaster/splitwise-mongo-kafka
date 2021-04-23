@@ -6,6 +6,7 @@ const Bill = require('../../db/models/Bill');
 const getGroupDetailsHandler = (msg, callback) => {
   const res = {};
   Group.findOne({ groupName: msg.groupName })
+    .populate({ path: 'members', select: 'name image' })
     .then((group) => {
       Bill.find({ groupName: msg.groupName })
         .populate({ path: 'users.user', select: 'name image' })
@@ -22,6 +23,7 @@ const getGroupDetailsHandler = (msg, callback) => {
             res.data = {
               groupName: group.groupName,
               groupImage: group.groupImage,
+              users: group.members,
             };
             callback(null, res);
           } else {

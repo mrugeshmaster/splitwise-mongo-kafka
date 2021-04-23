@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unused-state */
-/* eslint-disable react/no-access-state-in-setstate */
 import React, { useState } from 'react';
 import { Col, Form, Button } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';

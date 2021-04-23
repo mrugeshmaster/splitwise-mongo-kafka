@@ -21,7 +21,7 @@ module.exports = (req, res) => {
         'Content-Type': 'application/json',
       });
       res.end(JSON.stringify({
-        image: results.message.avatarURL,
+        image: results.data,
         message: 'PROFILE_UPDATE_IMAGE_SUCCESS',
       }));
     }

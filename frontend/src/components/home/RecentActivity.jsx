@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import {
@@ -28,10 +29,7 @@ export default function RecentActivity() {
       groupName,
     };
     dispatch(getActivityAction(query));
-    if (activities && activities.pages <= 1) {
-      setActivePage(1);
-    }
-  }, [activePage, dispatch, groupName, order, pageSize]);
+  }, [order, pageSize, activePage, groupName, dispatch]);
 
   const items = [];
   if (activities && activities.pages) {
@@ -75,7 +73,7 @@ export default function RecentActivity() {
                 id="dropdown-menu-align-right"
               >
                 {pageSizes.map((ps) => (
-                  <Dropdown.Item as="button" value={ps} onClick={(e) => setPageSize(e.target.value)}>{ps}</Dropdown.Item>
+                  <Dropdown.Item as="button" key={ps} value={ps} onClick={(e) => { setPageSize(e.target.value); setActivePage(1); }}>{ps}</Dropdown.Item>
                 ))}
               </DropdownButton>
             </Col>
@@ -86,9 +84,9 @@ export default function RecentActivity() {
                 title="Filter"
                 id="dropdown-menu-align-right"
               >
-                <Dropdown.Item as="button" value="All Groups" onClick={() => setGroupName('ALL')}>All Groups</Dropdown.Item>
+                <Dropdown.Item as="button" key="ALL" value="All Groups" onClick={() => { setGroupName('ALL'); setActivePage(1); }}>All Groups</Dropdown.Item>
                 {groups && groups.length > 0 && groups.map((group) => (
-                  <Dropdown.Item as="button" value={group} onClick={() => setGroupName(group)}>{group}</Dropdown.Item>
+                  <Dropdown.Item as="button" key={group} value={group} onClick={() => { setGroupName(group); setActivePage(1); }}>{group}</Dropdown.Item>
                 ))}
               </DropdownButton>
             </Col>
@@ -100,16 +98,18 @@ export default function RecentActivity() {
                 id="dropdown-menu-align-right"
               >
                 <Dropdown.Item
+                  key="DESC"
                   as="button"
                   value="DESC"
-                  onClick={() => setOrder('DESC')}
+                  onClick={() => { setOrder('DESC'); setActivePage(1); }}
                 >
                   Newest
                 </Dropdown.Item>
                 <Dropdown.Item
                   as="button"
+                  key="ASC"
                   value="ASC"
-                  onClick={() => setOrder('ASC')}
+                  onClick={() => { setOrder('ASC'); setActivePage(1); }}
                 >
                   Oldest
                 </Dropdown.Item>
@@ -125,13 +125,14 @@ export default function RecentActivity() {
           </Row>
           <Row>
             <ListGroup variant="flush" style={{ width: '100%' }}>
-              {activities?.activities.map((activity) => (
-                <ListGroup.Item>
-                  <RecentActivityCell
-                    activity={activity}
-                  />
-                </ListGroup.Item>
-              ))}
+              {activities
+                && activities.activities.length > 0 ? activities?.activities.map((activity) => (
+                  <ListGroup.Item key={activity._id}>
+                    <RecentActivityCell
+                      activity={activity}
+                    />
+                  </ListGroup.Item>
+                )) : (<h3 className="mt-3 text-muted">No Recent Activity</h3>)}
             </ListGroup>
           </Row>
         </Col>

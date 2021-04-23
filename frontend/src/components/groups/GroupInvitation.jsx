@@ -10,7 +10,7 @@ import { acceptInvite, rejectInvite } from '../../actions/groups/groupInviteActi
 export default function GroupInvitation(props) {
   const dispatch = useDispatch();
   const data = {
-    groupName: props.groupInvite,
+    groupName: props.groupInvite.groupName,
   };
   const onAcceptInvite = () => {
     dispatch(acceptInvite(data));
@@ -24,9 +24,9 @@ export default function GroupInvitation(props) {
 
   return (
     <Card className="m-2" style={{ width: '18rem' }}>
-      {/* <Card.Img variant="top" src={group_image} /> */}
+      <Card.Img variant="top" src={props.groupInvite.groupImage} />
       <Card.Body>
-        <Card.Title>{props.groupInvite}</Card.Title>
+        <Card.Title>{props.groupInvite.groupName}</Card.Title>
         <Button variant="info" onClick={onAcceptInvite}>Accept Invite</Button>
         {'\u00A0'}
         {'\u00A0'}

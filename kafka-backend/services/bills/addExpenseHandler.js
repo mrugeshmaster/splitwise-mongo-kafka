@@ -46,20 +46,6 @@ const addExpenseHandler = (msg, callback) => {
           };
           activityController(data);
 
-          // bill.users.map((user) => {
-          //   const data = {
-          //     activity: 'CREATE',
-          //     user: user.user,
-          //     billDescription: bill.description,
-          //     groupName: group.groupName,
-          //     collectOrPay: user.collectOrPay,
-          //     amount: bill.splitAmount * (user.settled ? 0 : (
-          //       user.collectOrPay === 'COLLECT'
-          //         ? bill.users.filter((_user) => _user.settled === false).length - 1 : -1
-          //     )),
-          //   };
-          //   activityController(data);
-          // });
           res.status = 200;
           res.data = 'BILL_CREATED';
           callback(null, res);

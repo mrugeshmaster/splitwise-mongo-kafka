@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useState } from 'react';
 import {
   Navbar, Nav, Dropdown, Image, Col,

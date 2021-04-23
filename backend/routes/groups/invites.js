@@ -17,7 +17,7 @@ module.exports = (req, res) => {
       res.writeHead(404, {
         'Content-Type': 'application/json',
       });
-      res.end(JSON.stringify({ message: 'SOMETHING_WENT_WRONG' }));
+      res.end(JSON.stringify({ message: results.data }));
     } else {
       res.writeHead(200, {
         'Content-Type': 'application/json',

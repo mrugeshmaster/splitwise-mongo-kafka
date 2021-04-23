@@ -14,9 +14,9 @@ export default function LeftSideBar() {
   }, [dispatch]);
 
   if (groupList && groupList.length > 0) {
-    groupLinks = groupList.map((groupName) => (
-      <Link key={groupName} className="nav-link" to={`/groupdetails/${groupName}`}>
-        {groupName}
+    groupLinks = groupList.map((list) => (
+      <Link key={list.groupName} className="nav-link" to={`/groupdetails/${list.groupName}`}>
+        {list.groupName}
       </Link>
     ));
   }
@@ -26,7 +26,7 @@ export default function LeftSideBar() {
       <Link className="nav-link" to="/groups">My Groups</Link>
       <Link className="nav-link" to="/recentactivity">Recent Activity</Link>
       <hr />
-      <div className="px-3 text-muted">Groups</div>
+      {groupList && groupList.length > 0 && (<div className="px-3 text-muted">Groups</div>)}
       {groupLinks}
     </Nav>
   );

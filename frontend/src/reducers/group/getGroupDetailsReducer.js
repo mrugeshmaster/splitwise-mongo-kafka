@@ -1,7 +1,8 @@
-import { GET_GROUP_DETAILS } from '../../actions/constant-types';
+import { GET_GROUP_DETAILS, LEAVE_GROUP, RESET_MESSAGE } from '../../actions/constant-types';
 
 const initState = {
   groupDetails: {},
+  message: '',
 };
 
 const getGroupDetailsReducer = (state = initState, action) => {
@@ -10,6 +11,16 @@ const getGroupDetailsReducer = (state = initState, action) => {
       return {
         ...state,
         groupDetails: action.payload,
+      };
+    case LEAVE_GROUP:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case RESET_MESSAGE:
+      return {
+        ...state,
+        message: null,
       };
     default:
       return state;

@@ -2,7 +2,7 @@ const jwtDecode = require('jwt-decode');
 const kafka = require('../../kafka/client');
 
 module.exports = (req, res) => {
-  req.body.path = 'get-groups-memberships';
+  req.body.path = 'group-leave';
 
   const decodedToken = jwtDecode(req.headers.authorization);
   req.body.userId = decodedToken.id;
@@ -13,18 +13,17 @@ module.exports = (req, res) => {
         'Content-Type': 'application/json',
       });
       res.end({ message: err });
-    } else if (results.status === 404) {
-      res.writeHead(404, {
+    } else if (results.status === 400) {
+      res.writeHead(results.status, {
         'Content-Type': 'application/json',
       });
-      res.end(JSON.stringify({ message: results.data }));
+      res.end(JSON.stringify({ message: 'SOMETHING_WENT_WRONG' }));
     } else {
-      res.writeHead(200, {
+      res.writeHead(results.status, {
         'Content-Type': 'application/json',
       });
-      res.end(JSON.stringify({
-        groupMemberships: results.data,
-      }));
+      // res.end(JSON.stringify(results.data));
+      res.end(JSON.stringify({ message: results.data }));
     }
   });
 };

@@ -3,8 +3,7 @@ const User = require('../../db/models/User');
 
 const rejectInviteHandler = async (msg, callback) => {
   const res = {};
-
-  Group.findOne({ name: msg.groupName })
+  Group.findOne({ groupName: msg.groupName })
     .then((group) => {
       User.findByIdAndUpdate(msg.userId,
         { $pull: { invitations: group._id } })

@@ -7,6 +7,7 @@ const accept = require('./accept');
 const reject = require('./reject');
 const users = require('./users');
 const groupdetails = require('./groupdetails');
+const leave = require('./leave');
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.get('/invites', checkAuth, invites);
 router.get('/memberships', checkAuth, memberships);
 router.post('/accept', checkAuth, accept);
 router.post('/reject', checkAuth, reject);
+router.post('/leave', checkAuth, leave);
 router.get('/users', checkAuth, users);
 router.get('/:groupName', checkAuth, groupdetails);
 

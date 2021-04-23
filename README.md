@@ -3,7 +3,7 @@
 Splitwise Clone using Mongo, Express, React and Node.
 
 ![Node.js build CI](https://github.com/mrugeshmaster/splitwise-mongo-kafka/actions/workflows/node.js.yml/badge.svg)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/mrugeshmaster/splitwise-mongo-kafka)
+<!-- ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/mrugeshmaster/splitwise-mongo-kafka) -->
 ![Node version](https://img.shields.io/badge/nodejs-14.16.0-blue)
 
 ## Backend
@@ -20,7 +20,7 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Group List
 - [x] Group Invite
 - [x] Group Reject
-- [ ] Group Leave
+- [x] Group Leave
 - [x] Group Details
 - [x] Create Bill
 - [x] Get Balance Details
@@ -45,9 +45,9 @@ Splitwise Clone using Mongo, Express, React and Node.
 - [x] Group Details
 - [x] Add Expense Modal
 - [x] Settle Up Modal
-- [ ] Recent Activity
+- [x] Recent Activity
 - [x] Left Sidebar
 - [x] Right Sidebar
 - [x] Accordion for bills
 - [x] **Comments on Bills**
-- [ ] **Pagination on Recent Activity**
+- [x] **Pagination on Recent Activity**

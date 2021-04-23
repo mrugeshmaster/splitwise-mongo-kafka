@@ -5,14 +5,15 @@ const getGroupMembershipsHandler = (msg, callback) => {
   const res = {};
   User.findById(msg.userId)
     .then((user) => {
-      Group.find({ _id: { $in: user.memberships } })
+      Group.find({ _id: { $in: user.memberships } }, { groupName: 1, groupImage: 1 })
         .then((groups) => {
           if (groups.length > 0) {
-            res.data = groups.map((group) => group.groupName);
             res.status = 200;
+            res.data = groups;
             callback(null, res);
           } else {
             res.status = 404;
+            res.data = 'NO_MEMBERSHIPS';
             callback(null, res);
           }
         })

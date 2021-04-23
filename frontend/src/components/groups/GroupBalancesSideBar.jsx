@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Row, Media, Container } from 'react-bootstrap';
 import numeral from 'numeral';
@@ -19,11 +20,19 @@ export default function GroupDetailsSideBar(props) {
             <Media.Body>
               <Row className="pl-2">{user.name}</Row>
               <Row
-                className={user.amount > 0 ? 'paid pl-2' : 'owe pl-2'}
+                className={!user.amount || user.amount === 0
+                  ? 'billdate pl-2'
+                  : user.amount > 0
+                    ? 'paid pl-2'
+                    : 'owe pl-2'}
               >
-                {user.amount > 0 ? 'gets back' : 'owes'}
+                {!user.amount || user.amount === 0
+                  ? 'is settled'
+                  : user.amount > 0
+                    ? 'gets back'
+                    : 'owes'}
                 &nbsp;
-                {numeral(Math.abs(user.amount)).format('$0,0.00')}
+                {!user.amount || user.amount === 0 ? '' : numeral(Math.abs(user.amount)).format('$0,0.00')}
               </Row>
             </Media.Body>
           </Media>

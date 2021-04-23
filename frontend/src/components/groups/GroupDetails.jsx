@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
 import {
   Row, Col, Button, ListGroup,
@@ -10,7 +9,7 @@ import LeftSidebar from '../landing/LeftSideBar';
 import ExpenseModal from '../bills/ExpenseModal';
 import GroupDetailsCell from './GroupDetailsCell';
 import GroupDetailsSideBar from './GroupBalancesSideBar';
-import getGroupDetails from '../../actions/groups/groupDetailsActions';
+import { getGroupDetails } from '../../actions/groups/groupDetailsActions';
 
 export default function GroupDetails() {
   const [showExpenseModal, setShowExpenseModal] = useState(false);
@@ -27,20 +26,17 @@ export default function GroupDetails() {
     dispatch(getGroupDetails(params.groupName));
   };
 
-  const groupElements = [];
+  let groupElements = [];
   if (groupDetails.bills && groupDetails.bills.length > 0) {
-    groupDetails.bills.map((bill) => {
-      const groupElement = (
-        <ListGroup.Item key={bill.description}>
-          <GroupDetailsCell
-            key={bill.description}
-            bill={bill}
-            getGroupDetails={getGroupDetails}
-          />
-        </ListGroup.Item>
-      );
-      groupElements.push(groupElement);
-    });
+    groupElements = groupDetails.bills.map((bill) => (
+      <ListGroup.Item key={bill.description}>
+        <GroupDetailsCell
+          key={bill.description}
+          bill={bill}
+          getGroupDetails={getGroupDetails}
+        />
+      </ListGroup.Item>
+    ));
   }
 
   let redirectVar = null;
@@ -74,6 +70,7 @@ export default function GroupDetails() {
             </Row>
             &nbsp;
             <Row>
+              {!groupElements.length && (<h3 className="mt-3 text-muted"> Add A New Bill !! </h3>)}
               <ListGroup variant="flush" style={{ width: '100%' }}>
                 {groupElements}
               </ListGroup>
@@ -82,7 +79,7 @@ export default function GroupDetails() {
           <Col md={{ span: 2 }}>
             <GroupDetailsSideBar
               key={params.groupName}
-              sideBarData={groupDetails.sideBarData}
+              sideBarData={groupDetails.sideBarData || groupDetails.users}
             />
           </Col>
         </Row>

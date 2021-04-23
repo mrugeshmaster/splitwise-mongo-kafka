@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useEffect, useState, useCallback } from 'react';
 import { Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';

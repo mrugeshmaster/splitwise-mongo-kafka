@@ -18,3 +18,4 @@ config*
 kafka_commands
 *.mongodb
 .vscode
+.env
