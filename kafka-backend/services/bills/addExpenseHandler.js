@@ -25,7 +25,6 @@ const addExpenseHandler = (msg, callback) => {
           res.data = err;
           callback(null, res);
         } else if (bill) {
-          // console.log(bill.users);
           const users = bill.users.map((user) => (
             {
               user: user.user,

@@ -5,7 +5,6 @@ module.exports = (req, res) => {
   req.body.path = 'delete-comment';
   const decodedToken = jwtDecode(req.headers.authorization);
   req.body.userId = decodedToken.id;
-  console.log(req.body);
   kafka.makeRequest('bills', req.body, (err, results) => {
     if (err) {
       res.writeHead(500, {

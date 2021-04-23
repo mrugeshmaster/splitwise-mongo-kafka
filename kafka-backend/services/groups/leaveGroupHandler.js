@@ -1,4 +1,5 @@
 const User = require('../../db/models/User');
+// const Group = require('../../db/models/Group');
 const Bill = require('../../db/models/Bill');
 const Group = require('../../db/models/Group');
 
@@ -13,6 +14,7 @@ const leaveGroupHandler = async (msg, callback) => {
               $and: [
                 { 'users.user': user._id },
                 { groupName: msg.groupName },
+                // { paidby: { $eq: user._id } },
               ],
             },
           },
@@ -40,11 +42,11 @@ const leaveGroupHandler = async (msg, callback) => {
                       ],
                     },
                     {
-                      $and: [
-                        { $eq: ['paidby', user._id] },
-                        { $eq: ['$$users.collectOrPay', 'PAY'] },
-                        { $eq: ['$$users.settled', false] },
-                      ],
+                      // $and: [
+                      //   { $eq: ['paidby', user._id] },
+                      //   { $eq: ['$$users.collectOrPay', 'PAY'] },
+                      //   { $eq: ['$$users.settled', false] },
+                      // ],
                     }],
                   },
                 },
@@ -56,6 +58,8 @@ const leaveGroupHandler = async (msg, callback) => {
               groupName: 1,
               description: 1,
               _id: 0,
+              users: 1,
+              usersSettled: 1,
               notSettledUsers: { $size: '$usersSettled' },
             },
           },
