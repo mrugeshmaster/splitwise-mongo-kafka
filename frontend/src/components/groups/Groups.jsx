@@ -51,7 +51,6 @@ export default function Groups() {
     setShow(true);
     dispatch(resetGroupMessage());
   };
-
   if (message === 'GROUP_LEAVE_ERROR') {
     showAlert();
   } else if (message === 'GROUP_LEAVE_SUCCESS') {

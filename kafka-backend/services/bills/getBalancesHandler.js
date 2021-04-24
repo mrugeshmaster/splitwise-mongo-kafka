@@ -48,6 +48,7 @@ const getBalancesHandler = (msg, callback) => {
                   { $match: { $and: [{ 'users.user': user._id }, { paidby: { $eq: user._id } }] } },
                   {
                     $project: {
+                      description: 1,
                       splitAmount: 1,
                       users: {
                         $filter: {
