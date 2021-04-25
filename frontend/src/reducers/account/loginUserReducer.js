@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT } from '../../actions/constant-types';
+import { USER_LOGIN } from '../../actions/constant-types';
 
 const initState = {
   user: {},
@@ -11,8 +11,6 @@ const loginUserReducer = (state = initState, action) => {
         ...state,
         user: action.payload,
       };
-    case USER_LOGOUT:
-      return {};
     default:
       return state;
   }

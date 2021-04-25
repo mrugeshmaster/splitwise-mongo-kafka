@@ -16,7 +16,7 @@ import addCommentReducer from './bills/addCommentReducer';
 import deleteCommentReducer from './bills/deleteCommentReducer';
 import getActivityReducer from './activity/getActivityReducer';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   login: loginUserReducer,
   signup: signUpUserReducer,
   userProfile: userProfileReducer,
@@ -34,3 +34,5 @@ export default combineReducers({
   deleteCommentReducer,
   getActivityReducer,
 });
+
+export default (state, action) => rootReducer(action.type === 'USER_LOGOUT' ? undefined : state, action);
