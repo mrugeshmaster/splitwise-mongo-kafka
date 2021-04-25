@@ -6,6 +6,26 @@ Splitwise Clone using Mongo, Express, React and Node.
 <!-- ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/mrugeshmaster/splitwise-mongo-kafka) -->
 ![Node version](https://img.shields.io/badge/nodejs-14.16.0-blue)
 
+## Steps
+
+- Clone the repo
+- Open Terminal at repo folder and Run cd backend
+- Run npm i to install required packages for NodeJS backend
+- Run npm start to start the ExpressJS server
+- Open Terminal at repo folder and Run cd kafka-backend
+- Run npm i to install required packages for Kafka Node backend
+- Run npm start to start the Kafka Node server
+- Open another Terminal at repo folder and Run cd frontend
+- Run npm i to install required packages for ReactJS frontend
+- Run npm start to start the ReactJS server
+
+> config.js files are removed from the application for sensitive information. Refer template files to generate own config data
+
+## Test Backend
+
+- Open Terminal at repo folder and Run cd backend
+- Run npm test to run Mocha test in Backend Server
+
 ## Backend
 
 - [x] Kafka

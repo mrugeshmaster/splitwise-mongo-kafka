@@ -14,8 +14,7 @@ node_modules/
 
 # Misc
 .DS_Store
-config*
+config.js
 kafka_commands
-*.mongodb
 .vscode
 .env

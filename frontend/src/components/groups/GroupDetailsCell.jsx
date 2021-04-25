@@ -49,7 +49,7 @@ export default function GroupDetailsCell(props) {
               </Row>
               <Row
                 className={
-                  props.bill.paidby.name === localStorage.getItem('')
+                  props.bill.paidby.name === localStorage.getItem('name')
                     ? 'paid' : 'owe'
                   }
               >

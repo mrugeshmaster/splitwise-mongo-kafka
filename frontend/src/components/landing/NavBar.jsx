@@ -52,8 +52,14 @@ export default function NavBar() {
     navUser = (
       <div className="collapse navbar-collapse navbar-right" id="navbarNav">
         <Nav className="mr-auto" />
-        <Nav.Item><Nav.Link href="/signup">&nbsp;Sign Up</Nav.Link></Nav.Item>
-        <Nav.Item><Nav.Link href="/login">&nbsp;Login</Nav.Link></Nav.Item>
+        <Nav.Item>
+          {/* <Nav.Link href="/signup">&nbsp;Sign Up</Nav.Link> */}
+          <Link className="nav-link" to="/signup">Sign Up</Link>
+        </Nav.Item>
+        <Nav.Item>
+          {/* <Nav.Link href="/login">&nbsp;Login</Nav.Link> */}
+          <Link className="nav-link" to="/login">Login</Link>
+        </Nav.Item>
       </div>
     );
   }

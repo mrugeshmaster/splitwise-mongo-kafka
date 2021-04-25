@@ -30,9 +30,9 @@ export default function Login() {
     localStorage.setItem('email', user.email);
     localStorage.setItem('idToken', user.idToken);
     redirectVar = <Redirect to="/home" />;
-  } else if (user.message === 'USER_DOES_NOT_EXIST') {
+  } else if (user && user.message === 'USER_DOES_NOT_EXIST') {
     message = 'User Does Not Exists';
-  } else if (user.message === 'INCORRECT_PASSWORD') {
+  } else if (user && user.message === 'INCORRECT_PASSWORD') {
     message = 'Incorrect Password';
   }
   return (
